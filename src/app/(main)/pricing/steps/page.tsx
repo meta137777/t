@@ -13,7 +13,12 @@ const PricingStepPage = async () => {
     data: postedData,
     method: "post",
   });
-  return <PricingSteps brandModel={brandData?.brandModelTypes ?? []} />;
+  return (
+    <PricingSteps
+
+    // brandModel={brandData?.brandModelTypes ?? []}
+    />
+  );
 };
 
 export default PricingStepPage;
