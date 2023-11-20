@@ -14,14 +14,25 @@ import DynamicBrandModal from "@/attom/modals/brand-model-of-car/dynamic-brand-m
 import { staticData } from "@/data";
 import { ADD_CATEGORY } from "@/redux/brand-model/brand-model-slice";
 import { useAppDispatch, useAppSelector } from "src/hooks/redux-hooks";
+import { useRequest } from "@/hooks/useRequest";
+import { FRONT2DB } from "@/config/url";
 
-const StepOne = ({ brandModel }: any) => {
+const StepOne = () => {
+  const { data: brandModel } = useRequest({
+    method: "GP",
+    url: `${FRONT2DB}/BrandModelType/Get/All`,
+    data: {
+      page_number: 1,
+      page_size: 200,
+    },
+  });
+
   const dispatch = useAppDispatch();
   const {
     year_of_manufacture,
     model,
     mileage,
-    is_car_made_aboard, 
+    is_car_made_aboard,
     brand_model_error,
   } = useAppSelector((state) => state.pricing);
 
@@ -77,13 +88,11 @@ const StepOne = ({ brandModel }: any) => {
     dispatch(ADD_CATEGORY(category));
   };
 
-  
-
   return (
     <div className="rounded-xl p-4 bg-white tablet:w-[27rem] md:w-[24rem] w-full h-full flex flex-col tablet:flex-col gap-8 mx-auto">
       <div className="w-full relative">
         <DynamicBrandModal
-          models={brandModel}
+          models={brandModel?.brandModelTypes || []}
           customHandleChange={customHandleChange}
           defaultValue={model}
         />
@@ -130,7 +139,6 @@ const StepOne = ({ brandModel }: any) => {
         handleClick={madeAbroadHandler}
         label={"نوع تولید"}
         options={staticData.car_madeaboard_types_pricing}
-        
       />
 
       <button
