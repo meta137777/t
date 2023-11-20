@@ -134,7 +134,7 @@ export default function RegisterCard() {
           setShowStepper={setShowStepper}
           showStepper={showStepper}
           handleResendCode={handleResendCode}
-          phone={formik.values.phone_number}
+          phone={formik?.values.phone_number}
           open={open}
           setOpen={setOpen}
         />
