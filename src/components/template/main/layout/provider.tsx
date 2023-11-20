@@ -38,9 +38,10 @@ const PageProvider = ({ children }: ProvderType) => {
   });
   return (
     <html lang="en">
-      <Head>
+      <head>
         <title>OtO | اُتو</title>
-      </Head>
+        <link rel="icon" href="/favicon.png" />
+      </head>
       <body>
         <QueryClientProvider client={queryClient}>
           <ThemeProvider theme={theme}>
